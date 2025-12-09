@@ -1,0 +1,31 @@
+{
+  "name": "online-exam-nextjs",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@lottiefiles/dotlottie-react": "^0.17.8",
+    "axios": "^1.4.0",
+    "clsx": "^1.2.1",
+    "debug": "^4.4.3",
+    "follow-redirects": "^1.15.11",
+    "framer-motion": "^12.23.24",
+    "jsonwebtoken": "^9.0.2",
+    "lottie-react": "^2.4.1",
+    "lucide-react": "^0.554.0",
+    "next": "13.5.7",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "recharts": "^3.4.1",
+    "supports-color": "^10.2.2"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.14",
+    "postcss": "^8.4.21",
+    "tailwindcss": "^3.4.7"
+  }
+}
