@@ -632,6 +632,44 @@ router.post("/register-complete", async (req, res) => {
 /* ------------------------------------------
 | 3️⃣ LOGIN
 ------------------------------------------- */
+// router.post("/login", async (req, res) => {
+//   try {
+//     const { email, password } = req.body;
+
+//     if (!email || !password)
+//       return res.status(400).json({ error: "Email & password required" });
+
+//     const user = await User.findOne({ where: { email } });
+//     if (!user)
+//       return res.status(400).json({ error: "Invalid email or password" });
+
+//     const isMatch = await bcrypt.compare(password, user.password_hash);
+//     if (!isMatch)
+//       return res.status(400).json({ error: "Invalid email or password" });
+
+//     const token = jwt.sign(
+//       { id: user.id, email: user.email, role: user.role },
+//       process.env.JWT_ACCESS_SECRET,
+//       { expiresIn: process.env.ACCESS_TOKEN_EXPIRES_IN }
+//     );
+
+//     res.json({
+//       message: "Login successful",
+//       token,
+//       user: { id: user.id, name: user.name, email: user.email, role: user.role },
+//     });
+
+//   } catch (err) {
+//     console.error("❌ LOGIN ERROR:", err);
+//     res.status(500).json({ error: "Server error during login" });
+//   }
+// });
+
+
+
+/* ------------------------------------------
+| 3️⃣ LOGIN  (FIXED WITH is_blocked CHECK)
+------------------------------------------- */
 router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -642,6 +680,13 @@ router.post("/login", async (req, res) => {
     const user = await User.findOne({ where: { email } });
     if (!user)
       return res.status(400).json({ error: "Invalid email or password" });
+
+    // 🔥 BLOCK CHECK HERE
+    if (user.is_blocked === 1 || user.is_blocked === true) {
+      return res.status(403).json({
+        error: "Your account is blocked by the admin. Contact support.",
+      });
+    }
 
     const isMatch = await bcrypt.compare(password, user.password_hash);
     if (!isMatch)
@@ -656,7 +701,12 @@ router.post("/login", async (req, res) => {
     res.json({
       message: "Login successful",
       token,
-      user: { id: user.id, name: user.name, email: user.email, role: user.role },
+      user: {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+      },
     });
 
   } catch (err) {
@@ -664,6 +714,7 @@ router.post("/login", async (req, res) => {
     res.status(500).json({ error: "Server error during login" });
   }
 });
+
 
 /* ------------------------------------------
 | 4️⃣ RESEND OTP

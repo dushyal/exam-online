@@ -1,6 +1,4 @@
-
-// only student login 
-
+// only student login
 
 // "use client";
 
@@ -87,11 +85,7 @@
 //   );
 // }
 
-
-// login => student + aadmin 
-
-
-
+// login => student + aadmin
 
 "use client";
 
@@ -141,12 +135,17 @@ export default function Login() {
         router.push("/dashboard");
       }
     } catch (err) {
+
+       let message = err.response?.data.error || err || "Login failed";
+
       console.error(err);
-      alert("Login failed");
+
+      alert(message);
     } finally {
       setBtnLoading(false);
     }
   };
+
 
   if (loading) return <p>Loading...</p>;
 
