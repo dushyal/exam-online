@@ -10,4 +10,3 @@ export const getAllStudents = async (req, res) => {
   }
 };
 
-// Add other functions: blockStudent, updateStudent, deleteStudent similarly
