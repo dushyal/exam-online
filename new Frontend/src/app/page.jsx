@@ -141,7 +141,7 @@ export default function Home() {
         className="w-full h-screen flex flex-col items-center justify-center px-10 py-24 gap-10 
         snap-start relative z-10"
       >
-        <h2 className="text-4xl font-bold mb-12 text-center">Features</h2>
+        <h2 className="text-4xl font-bold mb-12 text-center mt-12">Features</h2>
 
         <div className="w-full max-w-6xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
           {["Secure Platform", "Instant Results", "Full Admin Control"].map((title, i) => (
@@ -166,7 +166,7 @@ export default function Home() {
         id="sec3"
         className="w-full h-screen flex flex-col items-center justify-center px-10 snap-start relative z-10"
       >
-        <h2 className="text-4xl font-bold mb-12 text-center">Dashboard Preview</h2>
+        <h2 className="text-4xl font-bold mb-12 text-center mt-32">Dashboard Preview</h2>
 
         <div
           className="w-full max-w-5xl h-96 bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl 
