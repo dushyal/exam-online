@@ -201,8 +201,8 @@
 "use client";
 import { useEffect, useState } from "react";
 import api from "../../../api/axios";
-import Loader from "../../components/Loader";
-import NoData from "../../components/noData";
+import Loader from "../../../components/Loader";
+import NoData from "../../../components/noData";
 
 
 export default function AdminExams() {

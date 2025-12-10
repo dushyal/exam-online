@@ -48,7 +48,7 @@ useEffect(() => {
               <td className="border p-2">{r.exam?.title}</td>
               <td className="border p-2">{r.attempt_number}</td>
               <td className="border p-2">{r.score}</td>
-              <td className="border p-2">{r.pass_status}</td>
+              <td className="border p-2">{r.pass_status.toUpperCase()}</td>
               <td className="border p-2">{new Date(r.submitted_at).toLocaleString()}</td>
             </tr>
           ))}

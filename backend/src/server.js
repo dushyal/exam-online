@@ -129,6 +129,12 @@ import adminQuestionRoutes from "./routes/admin/adminQuestion.routes.js";
 import adminOptionRoutes from "./routes/admin/adminOption.routes.js";
 import adminAssignRoutes from "./routes/admin/adminAssign.routes.js";
 import adminResultsRoutes from "./routes/admin/adminResults.routes.js";
+import adminStudentRoutes from "./routes/admin/adminStudent.routes.js";
+
+
+
+
+
 
 
 import { connectDB, sequelize } from "./config/db.js";
@@ -148,7 +154,7 @@ app.use(
 );
 
 app.get("/", (req, res) => res.send("Server running"));
-
+app.use("/api/admin/students", adminStudentRoutes);
 app.use("/api/start-exam", examRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes);

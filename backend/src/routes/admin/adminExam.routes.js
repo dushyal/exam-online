@@ -453,4 +453,75 @@ router.delete("/:id", authMiddleware, adminOnly, async (req, res) => {
   }
 });
 
+
+
+// ============================
+// GET SINGLE EXAM BY ID
+// ============================
+router.get("/:id", authMiddleware, adminOnly, async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const exam = await Exam.findOne({ where: { id } });
+
+    if (!exam) {
+      return res.status(404).json({
+        success: false,
+        message: "Exam not found"
+      });
+    }
+
+    res.json({
+      success: true,
+      exam
+    });
+
+  } catch (err) {
+    console.error("GET EXAM ERROR:", err);
+    res.status(500).json({
+      success: false,
+      message: err.message
+    });
+  }
+});
+
+// ============================
+// UPDATE EXAM
+// ============================
+router.put("/:id", authMiddleware, adminOnly, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const {
+      name,
+      total_marks,
+      passing_percent,
+      duration_minutes,
+      start_time,
+      end_time
+    } = req.body;
+
+    const exam = await Exam.findOne({ where: { id } });
+
+    if (!exam) {
+      return res.status(404).json({ success: false, message: "Exam not found" });
+    }
+
+    await exam.update({
+      title: name,
+      total_marks,
+      passing_percent,
+      duration_minutes,
+      start_time: start_time ? new Date(start_time) : null,
+      end_time: end_time ? new Date(end_time) : null,
+    });
+
+    res.json({ success: true, message: "Exam updated successfully", exam });
+
+  } catch (err) {
+    console.error("UPDATE EXAM ERROR:", err);
+    res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+
 export default router;
