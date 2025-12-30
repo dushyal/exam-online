@@ -85,33 +85,82 @@
 
 // export default router;
 
+
+
+
+
+// import express from "express";
+// import {
+//   getAllQuestions,
+//   addQuestion,
+//   deleteQuestion,
+//   updateQuestion,
+//   getQuestionById
+// } from "../../controllers/admin/addQuestion.controller.js";
+
+// import authMiddleware from "../../middleware/auth.middleware.js";
+// import { adminOnly } from "../../middleware/adminOnly.js";
+
+// const router = express.Router();
+
+// // -------- Get all questions --------
+// router.get("/", authMiddleware, adminOnly, getAllQuestions);
+
+// // -------- Get single question --------
+// router.get("/:id", authMiddleware, adminOnly, getQuestionById);
+
+// // -------- Add question --------
+// router.post("/add", authMiddleware, adminOnly, addQuestion);
+
+// // -------- Update question --------
+// router.put("/:id", authMiddleware, adminOnly, updateQuestion);
+
+// // -------- Delete question --------
+// router.delete("/:id", authMiddleware, adminOnly, deleteQuestion);
+
+// export default router;
+
+
+
+
+
 import express from "express";
 import {
   getAllQuestions,
+  getQuestionById,
   addQuestion,
-  deleteQuestion,
   updateQuestion,
-  getQuestionById
+  deleteQuestion
 } from "../../controllers/admin/addQuestion.controller.js";
 
-import authMiddleware from "../../middleware/auth.Middleware.js";
-import { adminOnly } from "../../middleware/adminOnly.js";
+import authMiddleware from "../../middleware/auth.middleware.js";
+import { allRolesAllowed } from "../../middleware/adminOnly.js";
 
 const router = express.Router();
 
-// -------- Get all questions --------
-router.get("/", authMiddleware, adminOnly, getAllQuestions);
+// -----------------------------
+// GET ALL QUESTIONS
+// -----------------------------
+router.get("/", authMiddleware, allRolesAllowed, getAllQuestions);
 
-// -------- Get single question --------
-router.get("/:id", authMiddleware, adminOnly, getQuestionById);
+// -----------------------------
+// GET SINGLE QUESTION
+// -----------------------------
+router.get("/:id", authMiddleware, allRolesAllowed, getQuestionById);
 
-// -------- Add question --------
-router.post("/add", authMiddleware, adminOnly, addQuestion);
+// -----------------------------
+// ADD QUESTION → ADMIN, SUBJECT, EXAMINATION
+// -----------------------------
+router.post("/add", authMiddleware, allRolesAllowed, addQuestion);
 
-// -------- Update question --------
-router.put("/:id", authMiddleware, adminOnly, updateQuestion);
+// -----------------------------
+// UPDATE QUESTION → ADMIN, SUBJECT, EXAMINATION
+// -----------------------------
+router.put("/:id", authMiddleware, allRolesAllowed, updateQuestion);
 
-// -------- Delete question --------
-router.delete("/:id", authMiddleware, adminOnly, deleteQuestion);
+// -----------------------------
+// DELETE QUESTION → ADMIN, SUBJECT, EXAMINATION
+// -----------------------------
+router.delete("/:id", authMiddleware, allRolesAllowed, deleteQuestion);
 
 export default router;

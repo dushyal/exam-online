@@ -101,7 +101,7 @@ export default function Login() {
   // If already logged in → redirect based on role
   useEffect(() => {
     if (!loading && user) {
-      if (user.role === "ADMIN") {
+      if (user.role === "ADMIN" || "EXAMINATION" || "SUBJECT") {
         router.push("/admin");
       } else {
         router.push("/dashboard");
@@ -141,6 +141,7 @@ export default function Login() {
       console.error(err);
 
       alert(message);
+      
     } finally {
       setBtnLoading(false);
     }

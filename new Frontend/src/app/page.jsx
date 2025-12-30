@@ -169,9 +169,9 @@ export default function Home() {
         <h2 className="text-4xl font-bold mb-12 text-center mt-32">Dashboard Preview</h2>
 
         <div
-          className="w-full max-w-5xl h-96 bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl 
+          className=" flex flex-col items-center justify-center w-full max-w-5xl h-96 bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl 
           shadow-[0_0_80px_rgba(255,255,255,0.2)] animate-slideUp"
-        ></div>
+        ><h1>No-Data Found</h1></div>
       </div>
 
     </section>

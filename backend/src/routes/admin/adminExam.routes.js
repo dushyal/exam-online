@@ -1,6 +1,6 @@
 // import express from "express";
 // import { Exam } from "../../models/index.js";
-// import { adminOnly } from "../../middleware/adminOnly.js";
+// import {  allRolesAllowed,} from "../../middleware/adminOnly.js";
 
 // const router = express.Router();
 
@@ -369,17 +369,22 @@
 
 // export default router;
 
+
+
+
+
 import express from "express";
 import { Exam } from "../../models/index.js";
 import authMiddleware from "../../middleware/auth.middleware.js";
 import { adminOnly } from "../../middleware/adminOnly.js";
+import { allRolesAllowed } from "../../middleware/adminOnly.js";
 
 const router = express.Router();
 
 // ============================
 // CREATE EXAM
 // ============================
-router.post("/create", authMiddleware, adminOnly, async (req, res) => {
+router.post("/create", authMiddleware,  allRolesAllowed, async (req, res) => {
   try {
     const {
       name,
@@ -421,7 +426,7 @@ router.post("/create", authMiddleware, adminOnly, async (req, res) => {
 // ============================
 // GET ALL EXAMS
 // ============================
-router.get("/", authMiddleware, adminOnly, async (req, res) => {
+router.get("/", authMiddleware,  allRolesAllowed, async (req, res) => {
   try {
     const exams = await Exam.findAll({
       order: [["id", "DESC"]],
@@ -437,7 +442,7 @@ router.get("/", authMiddleware, adminOnly, async (req, res) => {
 // ============================
 // DELETE EXAM
 // ============================
-router.delete("/:id", authMiddleware, adminOnly, async (req, res) => {
+router.delete("/:id", authMiddleware,  allRolesAllowed, async (req, res) => {
   try {
     const { id } = req.params;
     const deleted = await Exam.destroy({ where: { id } });
@@ -458,7 +463,7 @@ router.delete("/:id", authMiddleware, adminOnly, async (req, res) => {
 // ============================
 // GET SINGLE EXAM BY ID
 // ============================
-router.get("/:id", authMiddleware, adminOnly, async (req, res) => {
+router.get("/:id", authMiddleware,  allRolesAllowed, async (req, res) => {
   try {
     const { id } = req.params;
 
@@ -488,7 +493,7 @@ router.get("/:id", authMiddleware, adminOnly, async (req, res) => {
 // ============================
 // UPDATE EXAM
 // ============================
-router.put("/:id", authMiddleware, adminOnly, async (req, res) => {
+router.put("/:id", authMiddleware,  allRolesAllowed, async (req, res) => {
   try {
     const { id } = req.params;
     const {

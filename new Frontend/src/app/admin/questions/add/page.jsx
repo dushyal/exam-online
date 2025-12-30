@@ -399,7 +399,7 @@ export default function AddQuestionPage() {
   const [exams, setExams] = useState([]);
 
   const [form, setForm] = useState({
-    exam_id: "",
+    // exam_id: "",
     subject: "",
     level_number: "",
     question: "",
@@ -463,14 +463,14 @@ export default function AddQuestionPage() {
       <div className="grid gap-3">
 
         {/* Exam */}
-        <select name="exam_id" onChange={handleChange} className="p-2 border rounded">
+        {/* <select name="exam_id" onChange={handleChange} className="p-2 border rounded">
           <option>Select Exam</option>
           {exams.map((ex) => (
             <option key={ex.id} value={ex.id}>
               {ex.subject} — Level {ex.level_number}
             </option>
           ))}
-        </select>
+        </select> */}
 
         {/* Subject */}
         <select name="subject" onChange={handleChange} className="p-2 border rounded">

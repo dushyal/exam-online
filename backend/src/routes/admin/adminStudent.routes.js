@@ -11,7 +11,7 @@ const router = express.Router();
 router.get("/", authMiddleware, adminOnly, async (req, res) => {
   try {
     const rawStudents = await User.findAll({
-      where: { role: "CANDIDATE" }
+      // where: { role: "CANDIDATE" }
     });
 
     // Convert DB fields to frontend expected fields
