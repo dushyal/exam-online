@@ -72,14 +72,14 @@ import { Option } from "../../models/option.model.js";
 // ---------------- Add Question ----------------
 export const addQuestion = async (req, res) => {
   try {
-    const { exam_id, subject, level_number, question, optionA, optionB, optionC, optionD, correctAnswer } = req.body;
+    const { subject, level_number, question, optionA, optionB, optionC, optionD, correctAnswer } = req.body;
 
-    if (!exam_id || !subject || !question || !correctAnswer || !level_number) {
+    if (!subject || !question || !correctAnswer || !level_number) {
       return res.status(400).json({ message: "Missing fields" });
     }
 
     const newQuestion = await Question.create({
-      exam_id,
+      exam_id : null,
       subject,
       level_number,
       text: question,

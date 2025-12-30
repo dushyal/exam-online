@@ -296,7 +296,7 @@ export default function Header() {
 
           {user && (
             <>
-              {user.role === "ADMIN" ? (
+              {user.role === "ADMIN" || "EXAMINATION" || "SUBJECT" ? (
                 <Link href="/admin" className="hover:text-indigo-600 transition flex items-center gap-1">
                   <LayoutDashboard size={18} /> Admin Panel
                 </Link>
@@ -319,7 +319,7 @@ export default function Header() {
                 {profileOpen && (
                   <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-xl border p-2 z-[999]">
                     <Link
-                      href={user.role === "ADMIN" ? "/admin" : "/dashboard"}
+                      href={user.role === "ADMIN" || "EXAMINATION" || "SUBJECT" ? "/admin" : "/dashboard"}
                       className="block px-3 py-2 rounded hover:bg-gray-100"
                     >
                       Dashboard
@@ -372,7 +372,7 @@ export default function Header() {
           {user ? (
             <>
               <Link
-                href={user.role === "ADMIN" ? "/admin" : "/dashboard"}
+                href={user.role === "ADMIN" || "EXAMINATION" || "SUBJECT" ? "/admin" : "/dashboard"}
                 className="block mb-4 flex items-center gap-2"
                 onClick={() => setIsMenuOpen(false)}
               >

@@ -22,21 +22,46 @@
 
 
 
+// export const adminOnly = (req, res, next) => {
+//   // If req.user is missing → token missing or invalid
+//   if (!req.user) {
+//     return res.status(401).json({ message: "Unauthorized: No user found" });
+//   }
+
+//   // If role missing
+//   if (!req.user.role) {
+//     return res.status(401).json({ message: "Unauthorized: Role missing" });
+//   }
+
+//   // Check admin
+//   if (req.user.role !== "ADMIN" || "EXAMINATION" || "SUBJECT") {
+//     return res.status(403).json({ message: "Admins only" });
+//   }
+
+//   next();
+// };
+
+
+
+
+
+// middleware/roles.middleware.js
+
+// Only ADMIN
 export const adminOnly = (req, res, next) => {
-  // If req.user is missing → token missing or invalid
-  if (!req.user) {
-    return res.status(401).json({ message: "Unauthorized: No user found" });
-  }
+  if (!req.user) return res.status(401).json({ message: "Unauthorized" });
+  if (!req.user.role) return res.status(401).json({ message: "Role missing" });
 
-  // If role missing
-  if (!req.user.role) {
-    return res.status(401).json({ message: "Unauthorized: Role missing" });
-  }
+  if (req.user.role !== "ADMIN") return res.status(403).json({ message: "Admins only" });
+  next();
+};
 
-  // Check admin
-  if (req.user.role !== "ADMIN") {
-    return res.status(403).json({ message: "Admins only" });
-  }
+// ADMIN, SUBJECT, or EXAMINATION
+export const allRolesAllowed = (req, res, next) => {
+  if (!req.user) return res.status(401).json({ message: "Unauthorized" });
+  if (!req.user.role) return res.status(401).json({ message: "Role missing" });
 
+  const allowedRoles = ["ADMIN", "SUBJECT", "EXAMINATION"];
+  if (!allowedRoles.includes(req.user.role)) return res.status(403).json({ message: "Access denied" });
   next();
 };
